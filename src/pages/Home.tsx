@@ -1,5 +1,5 @@
 import ButtonDefault from '../components/button-default/ButtonDefault';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DefaultPage from '../config/layout/DefaultPage';
 import ArrayType from '../types/ArrayType';
 import { v4 as uuid } from 'uuid';
@@ -8,6 +8,10 @@ function Home() {
   const [taskName, setTaskName] = useState<string>('');
   const [taskDesc, setTaskDesc] = useState<string>('');
   const [taskArray, setTaskArray] = useState<ArrayType[]>([]);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(taskArray));
+  }, [taskArray]);
 
   function createTask() {
     if (taskName && taskDesc) {
